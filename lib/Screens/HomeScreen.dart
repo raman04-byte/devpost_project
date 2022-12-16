@@ -1,4 +1,5 @@
-import 'package:chat_app/Methods.dart';
+import 'package:chat_app/Authenticate/Methods.dart';
+import 'package:chat_app/Screens/ChatRoom.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   userMap != null
                       ? ListTile(
-                          onTap: () {},
+                          onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ChatRoom())),
                           leading: const Icon(
                             Icons.account_box,
                             color: Colors.black,
