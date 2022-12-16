@@ -43,4 +43,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /lib/cred/imp2.dart
-/android/app/google-services.json
+*.json
