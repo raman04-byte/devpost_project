@@ -1,3 +1,5 @@
+import 'package:chat_app/Methods.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CreateAccount extends StatefulWidget {
@@ -9,97 +11,138 @@ class CreateAccount extends StatefulWidget {
 
 class _CreateAccountState extends State<CreateAccount> {
   @override
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  bool isLoading = false;
+
   Widget build(BuildContext context) {
-    final TextEditingController _name=TextEditingController();
-    final TextEditingController _email=TextEditingController();
-    final TextEditingController _password=TextEditingController();
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(children: [
-          SizedBox(
-            height: size.height / 20,
-          ),
-          Container(
-              alignment: Alignment.centerLeft,
-              width: size.width / 1.2,
-              child: IconButton(
-                  onPressed: () {}, icon: Icon(Icons.arrow_back_ios))),
-          SizedBox(
-            height: size.height / 50,
-          ),
-          Container(
-            width: size.width / 1.3,
-            child: Text(
-              "Welcome",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+      body: isLoading
+          ? Center(
+              child: Container(
+                height: size.height / 20,
+                width: size.height / 20,
+                child: const CircularProgressIndicator(),
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(children: [
+                SizedBox(
+                  height: size.height / 20,
+                ),
+                Container(
+                    alignment: Alignment.centerLeft,
+                    width: size.width / 1.2,
+                    child: IconButton(
+                        onPressed: () {}, icon: Icon(Icons.arrow_back_ios))),
+                SizedBox(
+                  height: size.height / 50,
+                ),
+                Container(
+                  width: size.width / 1.3,
+                  child: const Text(
+                    "Welcome",
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  width: size.width / 1.3,
+                  child: const Text(
+                    "Create Account to continue!",
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height / 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 18.0),
+                  child: Container(
+                      width: size.width,
+                      alignment: Alignment.center,
+                      child: field(size, "Name", Icons.account_box, _name)),
+                ),
+                Container(
+                    width: size.width,
+                    alignment: Alignment.center,
+                    child: field(size, "Email", Icons.account_box, _email)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 18.0),
+                  child: Container(
+                    width: size.width,
+                    alignment: Alignment.center,
+                    child:
+                        field(size, "Password", Icons.lock_outlined, _password),
+                  ),
+                ),
+                SizedBox(
+                  height: size.height / 20,
+                ),
+                customButton(size),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
+                      )),
+                )
+              ]),
             ),
-          ),
-          Container(
-            width: size.width / 1.3,
-            child: Text(
-              "Create Account to continue!",
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500),
-            ),
-          ),
-          SizedBox(
-            height: size.height / 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18.0),
-            child: Container(
-                width: size.width,
-                alignment: Alignment.center,
-                child: field(size, "Name", Icons.account_box,_name)),
-          ),
-          Container(
-              width: size.width,
-              alignment: Alignment.center,
-              child: field(size, "Email", Icons.account_box,_email)),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18.0),
-            child: Container(
-              width: size.width,
-              alignment: Alignment.center,
-              child: field(size, "Password", Icons.lock_outlined,_password),
-            ),
-          ),
-          SizedBox(
-            height: size.height / 20,
-          ),
-          customButton(size),
-          GestureDetector(
-            onTap:()=>Navigator.pop(context),
-              child: Text(
-            "Login",
-            style: TextStyle(
-                color: Colors.blue, fontSize: 16, fontWeight: FontWeight.w500),
-          ))
-        ]),
-      ),
     );
   }
 
   Widget customButton(Size size) {
     return GestureDetector(
-      onTap:(){},
+      onTap: () {
+        if (_name.text.isNotEmpty &&
+            _email.text.isNotEmpty &&
+            _password.text.isNotEmpty) {
+          setState(() {
+            isLoading = true;
+          });
+          createAccount(_name.text, _email.text, _password.text).then((value) {
+            if (value != null) {
+              setState(() {
+                isLoading = false;
+              });
+              print("Login  Successful");
+            } else {
+              print("Login failed");
+            }
+          });
+        } else {
+          if (kDebugMode) {
+            print("Enter fields Properly");
+          }
+        }
+      },
       child: Container(
         height: size.height / 14,
         width: size.width / 1.2,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: Colors.blue),
         alignment: Alignment.center,
-        child: Text("Create Account",
+        child: const Text("Create Account",
             style: TextStyle(
-                color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold)),
       ),
     );
   }
 
-  Widget field(Size size, String hintText, IconData icon,TextEditingController cont) {
+  Widget field(
+      Size size, String hintText, IconData icon, TextEditingController cont) {
     return Container(
       height: size.height / 15,
       width: size.width / 1.1,
