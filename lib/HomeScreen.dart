@@ -1,5 +1,6 @@
 import 'package:chat_app/Methods.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -26,7 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
         userMap = value.docs[0].data();
         isLoading = false;
       });
-      print(userMap);
+      if (kDebugMode) {
+        print(userMap);
+      }
     });
   }
 
@@ -76,19 +79,18 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: size.height/50,
                   ),
 
-                  userMap != null
-                      ? ListTile(
+                  userMap != null ? ListTile(
                           onTap: () {},
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.account_box,
                             color: Colors.black,
                           ),
                           title: Text(
                             userMap['name'],
-                            style: TextStyle(color: Colors.black,fontSize: 17,fontWeight: FontWeight.w500),
+                            style: const TextStyle(color: Colors.black,fontSize: 17,fontWeight: FontWeight.w500),
                           ),
                           subtitle: Text(userMap['email']),
-                          trailing: Icon(
+                          trailing: const Icon(
                             Icons.chat,
                             color: Colors.black,
                           ),
