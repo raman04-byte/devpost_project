@@ -1,5 +1,5 @@
 import 'package:chat_app/LoginScreen.dart';
-import 'package:chat_app/cred/imp.dart';
+import 'package:chat_app/cred/imp2.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
