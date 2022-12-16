@@ -1,8 +1,15 @@
+import 'package:chat_app/HomeScreen.dart';
+import 'package:chat_app/LoginScreen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 Future<User?> createAccount(String name, String email, String password) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
+
+  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+
   try {
     User? user = (await _auth.createUserWithEmailAndPassword(
             email: email, password: password))
@@ -10,7 +17,12 @@ Future<User?> createAccount(String name, String email, String password) async {
 
     if (user != null) {
       if (kDebugMode) {
-        print("Login Successful");
+        print("Account created Successful");
+        await _firebaseFirestore.collection('users').doc(_auth.currentUser?.uid).set({
+          "name":name,
+          "email":email,
+          "status":"Unavaliable",
+        });
       }
       return user;
     } else {
@@ -53,10 +65,12 @@ Future<User?> logIn(String email, String password) async {
   }
 }
 
-Future logOut() async {
+Future logOut(BuildContext context) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
   try {
-    await _auth.signOut();
+    await _auth.signOut().then((value) {
+      Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
+    });
   } catch (e) {
     if (kDebugMode) {
       print("Error");

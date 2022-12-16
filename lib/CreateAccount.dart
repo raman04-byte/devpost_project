@@ -2,6 +2,8 @@ import 'package:chat_app/Methods.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'HomeScreen.dart';
+
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
 
@@ -16,6 +18,7 @@ class _CreateAccountState extends State<CreateAccount> {
   final TextEditingController _password = TextEditingController();
   bool isLoading = false;
 
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -115,9 +118,15 @@ class _CreateAccountState extends State<CreateAccount> {
               setState(() {
                 isLoading = false;
               });
-              print("Account Created Successful");
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
+              if (kDebugMode) {
+                print("Account Created Successful");
+              }
             } else {
-              print("Login failed");
+              if (kDebugMode) {
+                print("Login failed");
+              }
               setState(() {
                 isLoading = false;
               });

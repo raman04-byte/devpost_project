@@ -1,5 +1,7 @@
 import 'package:chat_app/CreateAccount.dart';
+import 'package:chat_app/HomeScreen.dart';
 import 'package:chat_app/Methods.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -40,14 +42,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Container(
                   width: size.width / 1.3,
-                  child: Text(
+                  child: const Text(
                     "Welcome",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
                   width: size.width / 1.3,
-                  child: Text(
+                  child: const Text(
                     "Sign In to continue!",
                     style: TextStyle(
                         color: Colors.grey,
@@ -81,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 GestureDetector(
                     onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) => CreateAccount())),
-                    child: Text(
+                    child: const Text(
                       "Create Account",
                       style: TextStyle(
                           color: Colors.blue,
@@ -102,17 +104,25 @@ class _LoginScreenState extends State<LoginScreen> {
           });
           logIn(_email.text, _password.text).then((value) {
             if (value != null) {
-              print("Login  Successful");
+              if (kDebugMode) {
+                print("Login  Successful");
+              }
               setState(() {
                 isLoading = false;
               });
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
             } else {
-              print("Login falied");
+              if (kDebugMode) {
+                print("Login falied");
+              }
               isLoading = false;
             }
           });
         } else {
-          print("Fill the form correctly");
+          if (kDebugMode) {
+            print("Fill the form correctly");
+          }
         }
       },
       child: Container(
@@ -121,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: Colors.blue),
         alignment: Alignment.center,
-        child: Text("Login",
+        child: const Text("Login",
             style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,
@@ -140,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
         decoration: InputDecoration(
             prefixIcon: Icon(icon),
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: const TextStyle(color: Colors.grey),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             )),
