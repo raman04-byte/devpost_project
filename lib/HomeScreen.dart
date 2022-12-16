@@ -11,7 +11,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Map<String, dynamic> userMap;
+  Map<String, dynamic>? userMap;
+  bool isLoading = false;
   final TextEditingController _search = TextEditingController();
   void onSearch() async {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -33,20 +34,25 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-        appBar: AppBar(title: Text("Home Screen"),actions: [
-          IconButton(icon: Icon(Icons.logout),onPressed: ()=>logOut(context),)
-        ],),
+        appBar: AppBar(
+          title: const Text("Home Screen"),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () => logOut(context),
+            )
+          ],
+        ),
         body: isLoading
             ? Center(
                 child: Container(
                   height: size.height / 20,
                   width: size.width / 20,
-                  child: CircularProgressIndicator(),
+                  child: const CircularProgressIndicator(),
                 ),
               )
             : Column(
@@ -74,22 +80,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: size.height / 30,
                   ),
                   ElevatedButton(onPressed: onSearch, child: Text("Search")),
-
                   SizedBox(
-                    height: size.height/50,
+                    height: size.height / 50,
                   ),
-
-                  userMap != null ? ListTile(
+                  userMap != null
+                      ? ListTile(
                           onTap: () {},
                           leading: const Icon(
                             Icons.account_box,
                             color: Colors.black,
                           ),
                           title: Text(
-                            userMap['name'],
-                            style: const TextStyle(color: Colors.black,fontSize: 17,fontWeight: FontWeight.w500),
+                            userMap!['name'],
+                            style: const TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500),
                           ),
-                          subtitle: Text(userMap['email']),
+                          subtitle: Text(userMap!['email']),
                           trailing: const Icon(
                             Icons.chat,
                             color: Colors.black,
