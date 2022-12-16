@@ -115,9 +115,12 @@ class _CreateAccountState extends State<CreateAccount> {
               setState(() {
                 isLoading = false;
               });
-              print("Login  Successful");
+              print("Account Created Successful");
             } else {
               print("Login failed");
+              setState(() {
+                isLoading = false;
+              });
             }
           });
         } else {
