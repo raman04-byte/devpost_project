@@ -38,7 +38,27 @@ class ChatRoom extends StatelessWidget {
     return Scaffold(
       backgroundColor: '#333333'.toColor(),
       appBar: AppBar(
-        title: Text(userMap!['name']),
+        title: StreamBuilder<DocumentSnapshot>(
+          stream:
+              _firestore.collection("users").doc(userMap!['uid']).snapshots(),
+          builder: ((context, snapshot) {
+            if (snapshot.data != null) {
+              return Container(
+                child: Column(
+                  children: [
+                    Text(userMap!['name']),
+                    Text(
+                      snapshot.data!['status'],
+                      style: TextStyle(fontSize: 14),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Container();
+            }
+          }),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(children: [
