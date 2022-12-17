@@ -1,4 +1,4 @@
-import 'package:chat_app/LoginScreen.dart';
+import 'package:chat_app/Authenticate/LoginScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';

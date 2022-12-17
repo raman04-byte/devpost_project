@@ -3,7 +3,7 @@ import 'package:chat_app/Colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'Screens/HomeScreen.dart';
+import '../Screens/HomeScreen.dart';
 
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
@@ -39,8 +39,8 @@ class _CreateAccountState extends State<CreateAccount> {
                 Container(
                     alignment: Alignment.centerLeft,
                     width: size.width / 1.2,
-                    child: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.arrow_back_ios))),
+                    
+                    ),
                 SizedBox(
                   height: size.height / 50,
                 ),

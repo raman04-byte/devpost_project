@@ -1,5 +1,5 @@
 import 'package:chat_app/Colors.dart';
-import 'package:chat_app/CreateAccount.dart';
+import 'package:chat_app/Authenticate/CreateAccount.dart';
 import 'package:chat_app/Screens/HomeScreen.dart';
 import 'package:chat_app/Authenticate/Methods.dart';
 import 'package:flutter/foundation.dart';
@@ -18,7 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: '#333333'.toColor(),
@@ -39,7 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerLeft,
                     width: size.width / 1.2,
                     child: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.arrow_back_ios))),
+                        onPressed: () {},
+                        icon: const Icon(Icons.arrow_back_ios))),
                 SizedBox(
                   height: size.height / 50,
                 ),
@@ -84,8 +84,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: size.height / 20,
                 ),
                 GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => const CreateAccount())),
+                    onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => const CreateAccount())),
                     child: const Text(
                       "Create Account",
                       style: TextStyle(
@@ -113,8 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
               setState(() {
                 isLoading = false;
               });
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const HomeScreen()));
             } else {
               if (kDebugMode) {
                 print("Login falied");
@@ -149,10 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
       height: size.height / 15,
       width: size.width / 1.1,
       child: TextField(
-         style: const TextStyle(color: Colors.white), //<-- SEE HERE
+        style: const TextStyle(color: Colors.white), //<-- SEE HERE
         controller: cont,
-          cursorColor: Colors.white,
-        
+        cursorColor: Colors.white,
+
         decoration: InputDecoration(
             prefixIcon: Icon(icon),
             hintText: hintText,

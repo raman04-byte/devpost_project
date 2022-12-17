@@ -1,8 +1,9 @@
-import 'package:chat_app/LoginScreen.dart';
+import 'package:chat_app/Authenticate/Authenticate.dart';
+import 'package:chat_app/Authenticate/LoginScreen.dart';
 import 'package:chat_app/cred/imp2.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'package:chat_app/Authenticate/Authenticate.dart';
 Imp imp = Imp();
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: Authenticate(),
     );
   }
 }

@@ -12,7 +12,9 @@ import 'package:uuid/uuid.dart';
 class ChatRoom extends StatelessWidget {
   Map<String, dynamic>? userMap;
   final String? chatRoomId;
+
   ChatRoom({required this.chatRoomId, required this.userMap});
+  
   final TextEditingController _message = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -141,12 +143,12 @@ class ChatRoom extends StatelessWidget {
                     AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.data != null) {
                     return ListView.builder(
-                        itemCount: snapshot.data?.docs.length,
-                        itemBuilder: ((context, index) {
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
                           Map<String, dynamic> map = snapshot.data!.docs[index]
                               .data() as Map<String, dynamic>;
                           return messages(size, map, context);
-                        }));
+                        });
                   } else {
                     return Container();
                   }
@@ -170,10 +172,11 @@ class ChatRoom extends StatelessWidget {
                       controller: _message,
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.photo),
+                            icon: Icon(Icons.photo,color: Colors.white,),
                             onPressed: () => getImage(),
                             color: Colors.white,
-                          ),
+                            
+                          ),hintText: "Send Message",
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8))),
                     ),
