@@ -1,4 +1,5 @@
 import 'package:chat_app/Authenticate/Methods.dart';
+import 'package:chat_app/Colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: '#333333'.toColor(),
       body: isLoading
           ? Center(
               child: Container(
@@ -159,6 +161,7 @@ class _CreateAccountState extends State<CreateAccount> {
       height: size.height / 15,
       width: size.width / 1.1,
       child: TextField(
+        style: TextStyle(color: Colors.white),
         controller: cont,
         decoration: InputDecoration(
             prefixIcon: Icon(icon),

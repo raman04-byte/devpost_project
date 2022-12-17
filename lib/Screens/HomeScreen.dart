@@ -1,4 +1,5 @@
 import 'package:chat_app/Authenticate/Methods.dart';
+import 'package:chat_app/Colors.dart';
 import 'package:chat_app/Screens/ChatRoom.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
@@ -39,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: '#333333'.toColor(),
         appBar: AppBar(
           title: const Text("Home Screen"),
           actions: [
@@ -69,8 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: size.height / 14,
                       width: size.width / 1.15,
                       child: TextField(
+                        style: TextStyle(color: Colors.white),
                         controller: _search,
                         decoration: InputDecoration(
+                          
                             hintText: "Search",
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10))),

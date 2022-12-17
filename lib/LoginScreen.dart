@@ -1,3 +1,4 @@
+import 'package:chat_app/Colors.dart';
 import 'package:chat_app/CreateAccount.dart';
 import 'package:chat_app/Screens/HomeScreen.dart';
 import 'package:chat_app/Authenticate/Methods.dart';
@@ -17,8 +18,10 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: '#333333'.toColor(),
       body: isLoading
           ? Center(
               child: Container(
@@ -146,7 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
       height: size.height / 15,
       width: size.width / 1.1,
       child: TextField(
+         style: TextStyle(color: Colors.white), //<-- SEE HERE
         controller: cont,
+          cursorColor: Colors.white,
+        
         decoration: InputDecoration(
             prefixIcon: Icon(icon),
             hintText: hintText,
