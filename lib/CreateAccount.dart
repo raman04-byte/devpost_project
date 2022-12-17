@@ -13,7 +13,6 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  @override
   final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
@@ -26,7 +25,7 @@ class _CreateAccountState extends State<CreateAccount> {
       backgroundColor: '#333333'.toColor(),
       body: isLoading
           ? Center(
-              child: Container(
+              child: SizedBox(
                 height: size.height / 20,
                 width: size.height / 20,
                 child: const CircularProgressIndicator(),
@@ -41,18 +40,18 @@ class _CreateAccountState extends State<CreateAccount> {
                     alignment: Alignment.centerLeft,
                     width: size.width / 1.2,
                     child: IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_back_ios))),
+                        onPressed: () {}, icon: const Icon(Icons.arrow_back_ios))),
                 SizedBox(
                   height: size.height / 50,
                 ),
-                Container(
+                SizedBox(
                   width: size.width / 1.3,
                   child: const Text(
                     "Welcome",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: size.width / 1.3,
                   child: const Text(
                     "Create Account to continue!",
@@ -121,7 +120,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 isLoading = false;
               });
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                  context, MaterialPageRoute(builder: (_) => const HomeScreen()));
               if (kDebugMode) {
                 print("Account Created Successful");
               }
@@ -157,16 +156,16 @@ class _CreateAccountState extends State<CreateAccount> {
 
   Widget field(
       Size size, String hintText, IconData icon, TextEditingController cont) {
-    return Container(
+    return SizedBox(
       height: size.height / 15,
       width: size.width / 1.1,
       child: TextField(
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
         controller: cont,
         decoration: InputDecoration(
             prefixIcon: Icon(icon),
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.grey),
+            hintStyle: const TextStyle(color: Colors.grey),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             )),

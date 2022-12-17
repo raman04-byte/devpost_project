@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: '#333333'.toColor(),
       body: isLoading
           ? Center(
-              child: Container(
+              child: SizedBox(
                 height: size.height / 20,
                 width: size.height / 20,
                 child: const CircularProgressIndicator(),
@@ -39,18 +39,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     alignment: Alignment.centerLeft,
                     width: size.width / 1.2,
                     child: IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_back_ios))),
+                        onPressed: () {}, icon: const Icon(Icons.arrow_back_ios))),
                 SizedBox(
                   height: size.height / 50,
                 ),
-                Container(
+                SizedBox(
                   width: size.width / 1.3,
                   child: const Text(
                     "Welcome",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: size.width / 1.3,
                   child: const Text(
                     "Sign In to continue!",
@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 GestureDetector(
                     onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => CreateAccount())),
+                        MaterialPageRoute(builder: (_) => const CreateAccount())),
                     child: const Text(
                       "Create Account",
                       style: TextStyle(
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 isLoading = false;
               });
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                  context, MaterialPageRoute(builder: (_) => const HomeScreen()));
             } else {
               if (kDebugMode) {
                 print("Login falied");
@@ -145,11 +145,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget field(
       Size size, String hintText, IconData icon, TextEditingController cont) {
-    return Container(
+    return SizedBox(
       height: size.height / 15,
       width: size.width / 1.1,
       child: TextField(
-         style: TextStyle(color: Colors.white), //<-- SEE HERE
+         style: const TextStyle(color: Colors.white), //<-- SEE HERE
         controller: cont,
           cursorColor: Colors.white,
         

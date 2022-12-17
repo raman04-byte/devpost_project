@@ -2,6 +2,7 @@ import 'package:chat_app/Authenticate/Methods.dart';
 import 'package:chat_app/Colors.dart';
 import 'package:chat_app/Screens/ChatRoom.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +13,21 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   Map<String, dynamic>? userMap;
   bool isLoading = false;
   final TextEditingController _search = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  String? chatRoomId(String user1, String user2) {
+    if (user1[0].toLowerCase().codeUnits[0] >
+        user2[0].toLowerCase().codeUnits[0]) {
+      return "$user1$user2";
+    } else {
+      return "$user2$user1";
+    }
+  }
+
   void onSearch() async {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
     setState(() {
@@ -37,12 +49,50 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    setStatus("Online");
+  }
+
+  void setStatus(String status) async {
+    await _firestore
+        .collection('users')
+        .doc(_auth.currentUser!.uid)
+        .update({"status": status});
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      setStatus("Online");
+    } else {
+      setStatus("Offline");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: '#333333'.toColor(),
+        backgroundColor: '#333333'.toColor(),
         appBar: AppBar(
-          title: const Text("Home Screen"),
+          title: StreamBuilder<DocumentSnapshot>(
+            stream: _firestore.collection("users").doc().snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.data != null) {
+                return Container(
+                  child: Column(children: [
+                    Text(userMap!['name']),
+                    Text(userMap!['status']),
+
+                  ]),
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
           actions: [
             IconButton(
               icon: const Icon(Icons.logout),
@@ -52,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: isLoading
             ? Center(
-                child: Container(
+                child: SizedBox(
                   height: size.height / 20,
                   width: size.width / 20,
                   child: const CircularProgressIndicator(),
@@ -67,14 +117,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: size.height / 14,
                     width: size.width,
                     alignment: Alignment.center,
-                    child: Container(
+                    child: SizedBox(
                       height: size.height / 14,
                       width: size.width / 1.15,
                       child: TextField(
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         controller: _search,
                         decoration: InputDecoration(
-                          
                             hintText: "Search",
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10))),
@@ -84,13 +133,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: size.height / 30,
                   ),
-                  ElevatedButton(onPressed: onSearch, child: Text("Search")),
+                  ElevatedButton(
+                      onPressed: onSearch, child: const Text("Search")),
                   SizedBox(
                     height: size.height / 50,
                   ),
                   userMap != null
                       ? ListTile(
-                          onTap: ()=>Navigator.of(context).push(MaterialPageRoute(builder: (_)=>ChatRoom())),
+                          onTap: () {
+                            String? roomId = chatRoomId(
+                                _auth.currentUser!.displayName!,
+                                userMap!['name']);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => ChatRoom(
+                                      chatRoomId: roomId,
+                                      userMap: userMap,
+                                    )));
+                          },
                           leading: const Icon(
                             Icons.account_box,
                             color: Colors.black,

@@ -1,4 +1,3 @@
-import 'package:chat_app/Screens/HomeScreen.dart';
 import 'package:chat_app/LoginScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,10 +17,14 @@ Future<User?> createAccount(String name, String email, String password) async {
     if (user != null) {
       if (kDebugMode) {
         print("Account created Successful");
+
+        user.updateDisplayName(name);
+
         await _firebaseFirestore.collection('users').doc(_auth.currentUser?.uid).set({
           "name":name,
           "email":email,
           "status":"Unavaliable",
+          "uid":_auth.currentUser!.uid,
         });
       }
       return user;
@@ -69,7 +72,7 @@ Future logOut(BuildContext context) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
   try {
     await _auth.signOut().then((value) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
+      Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
     });
   } catch (e) {
     if (kDebugMode) {
