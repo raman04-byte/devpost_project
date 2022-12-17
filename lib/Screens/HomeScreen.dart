@@ -81,13 +81,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             stream: _firestore.collection("users").doc().snapshots(),
             builder: (context, snapshot) {
               if (snapshot.data != null) {
-                return Container(
-                  child: Column(children: [
-                    Text(userMap!['name']),
-                    Text(userMap!['status']),
+                return Column(children: [
+                  Text(userMap!['name']),
+                  Text(userMap!['status']),
 
-                  ]),
-                );
+                ]);
               } else {
                 return Container();
               }
