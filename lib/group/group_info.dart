@@ -127,7 +127,9 @@ class _GroupInfoState extends State<GroupInfo> {
     final Size size = MediaQuery.of(context).size;
 
     return SafeArea(
+      
       child: Scaffold(
+        backgroundColor: Colors.grey[300],
         body: isLoading
             ? Container(
                 height: size.height,

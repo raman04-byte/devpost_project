@@ -59,6 +59,7 @@ class _CreateGroupState extends State<CreateGroup> {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: Text("Group Name"),
       ),

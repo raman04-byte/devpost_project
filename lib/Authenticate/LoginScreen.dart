@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: '#333333'.toColor(),
+      backgroundColor: Colors.grey[300],
       body: isLoading
           ? Center(
               child: SizedBox(
@@ -46,17 +46,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   width: size.width / 1.3,
                   child: const Text(
-                    "Welcome",
+                    "Hello again",
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
                   width: size.width / 1.3,
                   child: const Text(
-                    "Sign In to continue!",
+                    "You have been missed!",
                     style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 25,
+                        fontSize: 20,
                         fontWeight: FontWeight.w500),
                   ),
                 ),

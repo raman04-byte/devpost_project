@@ -22,7 +22,7 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: '#333333'.toColor(),
+      backgroundColor: Colors.grey[300],
       body: isLoading
           ? Center(
               child: SizedBox(

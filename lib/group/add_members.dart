@@ -67,6 +67,7 @@ class _AddMembersINGroupState extends State<AddMembersINGroup> {
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: Text("Add Members"),
       ),
