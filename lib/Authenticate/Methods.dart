@@ -5,12 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 Future<User?> createAccount(String name, String email, String password) async {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
-  FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   try {
-    User? user = (await _auth.createUserWithEmailAndPassword(
+    User? user = (await auth.createUserWithEmailAndPassword(
             email: email, password: password))
         .user;
 
@@ -20,11 +20,11 @@ Future<User?> createAccount(String name, String email, String password) async {
 
         user.updateDisplayName(name);
 
-        await _firebaseFirestore.collection('users').doc(_auth.currentUser?.uid).set({
+        await firebaseFirestore.collection('users').doc(auth.currentUser?.uid).set({
           "name":name,
           "email":email,
           "status":"Unavaliable",
-          "uid":_auth.currentUser!.uid,
+          "uid":auth.currentUser!.uid,
         });
       }
       return user;
@@ -43,10 +43,10 @@ Future<User?> createAccount(String name, String email, String password) async {
 }
 
 Future<User?> logIn(String email, String password) async {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   try {
-    User? user = (await _auth.signInWithEmailAndPassword(
+    User? user = (await auth.signInWithEmailAndPassword(
             email: email, password: password))
         .user;
     if (user != null) {
@@ -69,9 +69,9 @@ Future<User?> logIn(String email, String password) async {
 }
 
 Future logOut(BuildContext context) async {
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
   try {
-    await _auth.signOut().then((value) {
+    await auth.signOut().then((value) {
       Navigator.push(context, MaterialPageRoute(builder: (_) => const LoginScreen()));
     });
   } catch (e) {

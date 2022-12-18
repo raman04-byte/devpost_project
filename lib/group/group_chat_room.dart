@@ -50,13 +50,13 @@ class GroupChatRoom extends StatelessWidget {
                       ),
                     ),
                   ),
-              icon: Icon(Icons.more_vert)),
+              icon: const Icon(Icons.more_vert)),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: size.height / 1.27,
               width: size.width,
               child: StreamBuilder<QuerySnapshot>(
@@ -88,13 +88,13 @@ class GroupChatRoom extends StatelessWidget {
               height: size.height / 10,
               width: size.width,
               alignment: Alignment.center,
-              child: Container(
+              child: SizedBox(
                 height: size.height / 12,
                 width: size.width / 1.1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       height: size.height / 17,
                       width: size.width / 1.3,
                       child: TextField(
@@ -102,7 +102,7 @@ class GroupChatRoom extends StatelessWidget {
                         decoration: InputDecoration(
                             suffixIcon: IconButton(
                               onPressed: () {},
-                              icon: Icon(Icons.photo),
+                              icon: const Icon(Icons.photo),
                             ),
                             hintText: "Send Message",
                             border: OutlineInputBorder(
@@ -111,7 +111,7 @@ class GroupChatRoom extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                        icon: Icon(Icons.send), onPressed: onSendMessage),
+                        icon: const Icon(Icons.send), onPressed: onSendMessage),
                   ],
                 ),
               ),
@@ -131,8 +131,8 @@ class GroupChatRoom extends StatelessWidget {
               ? Alignment.centerRight
               : Alignment.centerLeft,
           child: Container(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 14),
-              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+              margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: Colors.blue,
@@ -141,7 +141,7 @@ class GroupChatRoom extends StatelessWidget {
                 children: [
                   Text(
                     chatMap['sendBy'],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
@@ -152,7 +152,7 @@ class GroupChatRoom extends StatelessWidget {
                   ),
                   Text(
                     chatMap['message'],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                       color: Colors.white,
@@ -168,8 +168,8 @@ class GroupChatRoom extends StatelessWidget {
               ? Alignment.centerRight
               : Alignment.centerLeft,
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+            margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
             height: size.height / 2,
             child: Image.network(
               chatMap['message'],
@@ -181,15 +181,15 @@ class GroupChatRoom extends StatelessWidget {
           width: size.width,
           alignment: Alignment.center,
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
-            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: Colors.black38,
             ),
             child: Text(
               chatMap['message'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -198,7 +198,7 @@ class GroupChatRoom extends StatelessWidget {
           ),
         );
       } else {
-        return SizedBox();
+        return const SizedBox();
       }
     });
   }

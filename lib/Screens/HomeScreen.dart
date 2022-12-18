@@ -1,5 +1,4 @@
 import 'package:chat_app/Authenticate/Methods.dart';
-import 'package:chat_app/Colors.dart';
 import 'package:chat_app/Screens/ChatRoom.dart';
 import 'package:chat_app/group/group_chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -33,11 +32,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   }
 
   void onSearch() async {
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
     setState(() {
       isLoading = true;
     });
-    await _firestore
+    await firestore
         .collection('users')
         .where("email", isEqualTo: _search.text)
         .get()
@@ -81,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text("Home Screen"),
+        title: const Text("Home Screen"),
         actions: [
           IconButton(
             icon: const Icon(
@@ -163,10 +162,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
               ],
             ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.group, color: Colors.white),
+        child: const Icon(Icons.group, color: Colors.white),
       
         onPressed: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => GroupChatHomeScreen())),
+            .push(MaterialPageRoute(builder: (_) => const GroupChatHomeScreen())),
       ),
     );
   }

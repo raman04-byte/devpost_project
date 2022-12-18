@@ -47,14 +47,14 @@ class _GroupChatHomeScreenState extends State<GroupChatHomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Text("Groups"),
+        title: const Text("Groups"),
       ),
       body: isLoading
           ? Container(
               height: size.height,
               width: size.width,
               alignment: Alignment.center,
-              child: CircularProgressIndicator(),
+              child: const CircularProgressIndicator(),
             )
           : ListView.builder(
               itemCount: groupList.length,
@@ -68,16 +68,16 @@ class _GroupChatHomeScreenState extends State<GroupChatHomeScreen> {
                       ),
                     ),
                   ),
-                  leading: Icon(Icons.group),
+                  leading: const Icon(Icons.group),
                   title: Text(groupList[index]['name']),
                 );
               },
             ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.create),
+        child: const Icon(Icons.create),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (_) => AddMembersInGroup(),
+            builder: (_) => const AddMembersInGroup(),
           ),
         ),
         tooltip: "Create Group",

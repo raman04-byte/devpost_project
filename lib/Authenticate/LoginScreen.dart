@@ -1,4 +1,3 @@
-import 'package:chat_app/Colors.dart';
 import 'package:chat_app/Authenticate/CreateAccount.dart';
 import 'package:chat_app/Screens/HomeScreen.dart';
 import 'package:chat_app/Authenticate/Methods.dart';

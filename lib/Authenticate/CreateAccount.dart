@@ -1,5 +1,4 @@
 import 'package:chat_app/Authenticate/Methods.dart';
-import 'package:chat_app/Colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

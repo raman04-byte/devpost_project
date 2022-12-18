@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:chat_app/Colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -13,7 +12,7 @@ class ChatRoom extends StatelessWidget {
   Map<String, dynamic>? userMap;
   final String? chatRoomId;
 
-  ChatRoom({required this.chatRoomId, required this.userMap});
+  ChatRoom({super.key, required this.chatRoomId, required this.userMap});
   
   final TextEditingController _message = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -22,9 +21,9 @@ class ChatRoom extends StatelessWidget {
   File? imageFile;
 
   Future getImage() async {
-    ImagePicker _picker = ImagePicker();
+    ImagePicker picker = ImagePicker();
 
-    await _picker.pickImage(source: ImageSource.gallery).then((xFile) {
+    await picker.pickImage(source: ImageSource.gallery).then((xFile) {
       if (xFile != null) {
         imageFile = File(xFile.path);
         uploadImage();
@@ -110,16 +109,14 @@ class ChatRoom extends StatelessWidget {
               _firestore.collection("users").doc(userMap!['uid']).snapshots(),
           builder: ((context, snapshot) {
             if (snapshot.data != null) {
-              return Container(
-                child: Column(
-                  children: [
-                    Text(userMap!['name']),
-                    Text(
-                      snapshot.data!['status'],
-                      style: const TextStyle(fontSize: 10),
-                    ),
-                  ],
-                ),
+              return Column(
+                children: [
+                  Text(userMap!['name']),
+                  Text(
+                    snapshot.data!['status'],
+                    style: const TextStyle(fontSize: 10),
+                  ),
+                ],
               );
             } else {
               return Container();
@@ -172,7 +169,7 @@ class ChatRoom extends StatelessWidget {
                       controller: _message,
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.photo,),
+                            icon: const Icon(Icons.photo,),
                             onPressed: () => getImage(),
                             
                             
