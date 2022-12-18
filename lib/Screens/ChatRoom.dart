@@ -116,7 +116,7 @@ class ChatRoom extends StatelessWidget {
                     Text(userMap!['name']),
                     Text(
                       snapshot.data!['status'],
-                      style: const TextStyle(fontSize: 14),
+                      style: const TextStyle(fontSize: 10),
                     ),
                   ],
                 ),
@@ -168,13 +168,13 @@ class ChatRoom extends StatelessWidget {
                     height: size.height / 17,
                     width: size.width / 1.3,
                     child: TextField(
-                      style: TextStyle(color: Colors.white),
+                      
                       controller: _message,
                       decoration: InputDecoration(
                           suffixIcon: IconButton(
-                            icon: Icon(Icons.photo,color: Colors.white,),
+                            icon: Icon(Icons.photo,),
                             onPressed: () => getImage(),
-                            color: Colors.white,
+                            
                             
                           ),hintText: "Send Message",
                           border: OutlineInputBorder(
@@ -185,7 +185,7 @@ class ChatRoom extends StatelessWidget {
                       onPressed: onSendMessage,
                       icon: const Icon(
                         Icons.send_rounded,
-                        color: Colors.white,
+                        
                       ))
                 ],
               ),
@@ -215,7 +215,7 @@ class ChatRoom extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.white),
+                    ),
               ),
             ),
           )

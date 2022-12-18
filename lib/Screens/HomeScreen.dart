@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           IconButton(
             icon: const Icon(
               Icons.logout,
-              color: Colors.white,
+              
             ),
             onPressed: () => logOut(context),
           )
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     height: size.height / 14,
                     width: size.width / 1.15,
                     child: TextField(
-                      style: const TextStyle(color: Colors.white),
+                      
                       controller: _search,
                       decoration: InputDecoration(
                           hintText: "Search",
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         },
                         leading: const Icon(
                           Icons.account_box,
-                          color: Colors.white,
+                          
                         ),
                         title: Text(
                           userMap!['name'],
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         subtitle: Text(userMap!['email']),
                         trailing: const Icon(
                           Icons.chat,
-                          color: Colors.white,
+                          
                         ),
                       )
                     : Container()

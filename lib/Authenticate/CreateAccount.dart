@@ -160,7 +160,7 @@ class _CreateAccountState extends State<CreateAccount> {
       height: size.height / 15,
       width: size.width / 1.1,
       child: TextField(
-        style: const TextStyle(color: Colors.white),
+        cursorColor: Colors.black,
         controller: cont,
         decoration: InputDecoration(
             prefixIcon: Icon(icon),

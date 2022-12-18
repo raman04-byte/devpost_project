@@ -136,7 +136,6 @@ class _LoginScreenState extends State<LoginScreen> {
         alignment: Alignment.center,
         child: const Text("Login",
             style: TextStyle(
-                color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold)),
       ),
@@ -149,9 +148,9 @@ class _LoginScreenState extends State<LoginScreen> {
       height: size.height / 15,
       width: size.width / 1.1,
       child: TextField(
-        style: const TextStyle(color: Colors.white), //<-- SEE HERE
+        
         controller: cont,
-        cursorColor: Colors.white,
+        cursorColor: Colors.black,
 
         decoration: InputDecoration(
             prefixIcon: Icon(icon),
