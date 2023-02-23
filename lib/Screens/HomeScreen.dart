@@ -19,8 +19,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   final TextEditingController _search = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  
- 
 
   String? chatRoomId(String user1, String user2) {
     if (user1[0].toLowerCase().codeUnits[0] >
@@ -85,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           IconButton(
             icon: const Icon(
               Icons.logout,
-              
             ),
             onPressed: () => logOut(context),
           )
@@ -112,7 +109,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                     height: size.height / 14,
                     width: size.width / 1.15,
                     child: TextField(
-                      
                       controller: _search,
                       decoration: InputDecoration(
                           hintText: "Search",
@@ -143,7 +139,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         },
                         leading: const Icon(
                           Icons.account_box,
-                          
                         ),
                         title: Text(
                           userMap!['name'],
@@ -155,7 +150,6 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                         subtitle: Text(userMap!['email']),
                         trailing: const Icon(
                           Icons.chat,
-                          
                         ),
                       )
                     : Container()
@@ -163,9 +157,8 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.group, color: Colors.white),
-      
-        onPressed: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => const GroupChatHomeScreen())),
+        onPressed: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => const GroupChatHomeScreen())),
       ),
     );
   }
